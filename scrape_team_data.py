@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
 		team_data['team_stats'] = data
 
-		with open('data/by_team/'+ abbrv_dict[team] +'.json', 'w') as outfile:
+		with open('data/'+ abbrv_dict[team] +'.json', 'w') as outfile:
 			json.dump(team_data, outfile)
 
 
