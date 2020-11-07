@@ -105,12 +105,13 @@ def extract_champ_from_row(row_of_interest):
 
 	data = dict()
 
-	keys = ['champ', 'games', 'wins', 'losses', 'winrate', 'kills', 'deaths', 'assists','kda', 'cs', 'csm',
+	keys = ['champ', 'games', 'wins', 'losses', 'winrate', 'kills', 'deaths', 'assists', 'kda', 'cs', 'csm',
 			'gold', 'gpm', 'kpar', 'killshare', 'goldshare']
 
 	for i in range(len(keys)):
 		data[keys[i]] = table_columns[i].get_text()
-	
+
+
 	return data
 
 
@@ -126,7 +127,7 @@ def construct_gol_url(team):
 				 'DAMWON_Gaming': '849', 'DRX': '853', 'Gen.G': '852',
 				 'Top_Esports': '829', 'JD_Gaming': '836', 'Suning': '834', 'LGD_Gaming': '840',
 				 'G2_Esports': '891', 'Fnatic': '890', 'Rogue_(European_Team)': '895',
-				 'Machi_Esports': '976', 'PSG_Talon': '982', 'Unicorns_Of_Lov.CIS': '1014'}
+				 'Machi_Esports': '976', 'PSG_Talon': '982', 'Unicorns_Of_Love.CIS': '1014'}
 
 	url = "https://gol.gg/teams/team-stats/"+team_dict[team] + "/split-ALL/tournament-ALL/"
 	return url
