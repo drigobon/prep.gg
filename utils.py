@@ -121,14 +121,7 @@ def extract_champ_from_row(row_of_interest):
 #	 						Gol Scraping 													#
 #############################################################################################
 
-def construct_gol_url(team):
-
-	team_dict = {'Team_Liquid': '876', 'Team_SoloMid': '877', 'FlyQuest': '873',
-				 'DAMWON_Gaming': '849', 'DRX': '853', 'Gen.G': '852',
-				 'Top_Esports': '829', 'JD_Gaming': '836', 'Suning': '834', 'LGD_Gaming': '840',
-				 'G2_Esports': '891', 'Fnatic': '890', 'Rogue_(European_Team)': '895',
-				 'Machi_Esports': '976', 'PSG_Talon': '982', 'Unicorns_Of_Love.CIS': '1014'}
-
+def construct_gol_url(team, team_dict):
 	url = "https://gol.gg/teams/team-stats/"+team_dict[team] + "/split-ALL/tournament-ALL/"
 	return url
 

@@ -14,13 +14,19 @@ if __name__ == "__main__":
 			 'LGD_Gaming', 'Machi_Esports', 'PSG_Talon', 'Rogue_(European_Team)', 'Suning',
 			 'Team_Liquid', 'Team_SoloMid', 'Top_Esports', 'Unicorns_Of_Love.CIS']
 
-	abbrv_dict = {'DAMWON_Gaming': 'DWG', 'DRX': 'DRX', 'FlyQuest': 'FLY', 'Fnatic': 'FNC', 'G2_Esports': 'G2', 'Gen.G': 'GEN', 'JD_Gaming': 'JDG',
-			 'LGD_Gaming': 'LGD', 'Machi_Esports': 'M17', 'PSG_Talon': 'PSG', 'Rogue_(European_Team)': 'RGE', 'Suning': 'SN',
-			 'Team_Liquid': 'TL', 'Team_SoloMid': 'TSM', 'Top_Esports': 'TES', 'Unicorns_Of_Love.CIS': 'UOL'}
+	team_dict = {'Team_Liquid': '876', 'Team_SoloMid': '877', 'FlyQuest': '873',
+				 'DAMWON_Gaming': '849', 'DRX': '853', 'Gen.G': '852',
+				 'Top_Esports': '829', 'JD_Gaming': '836', 'Suning': '834', 'LGD_Gaming': '840',
+				 'G2_Esports': '891', 'Fnatic': '890', 'Rogue_(European_Team)': '895',
+				 'Machi_Esports': '976', 'PSG_Talon': '982', 'Unicorns_Of_Love.CIS': '1014'}
+
+
+	abbrv_dict = {'DAMWON_Gaming': 'DWG', 'DRX': 'DRX', 'FlyQuest': 'FLY', 'Fnatic': 'FNC', 'G2_Esports': 'G2',
+				  'Gen.G': 'GEN', 'JD_Gaming': 'JDG', 'LGD_Gaming': 'LGD', 'Machi_Esports': 'M17', 'PSG_Talon': 'PSG',
+				  'Rogue_(European_Team)': 'RGE', 'Suning': 'SN', 'Team_Liquid': 'TL', 'Team_SoloMid': 'TSM',
+				  'Top_Esports': 'TES', 'Unicorns_Of_Love.CIS': 'UOL'}
 
 	for team in teams:
-
-#	team = 'Team_Liquid'
 		print(team)
 
 		team_data = dict()
@@ -39,8 +45,16 @@ if __name__ == "__main__":
 
 		roles = ['top', 'jungle', 'mid', 'adc', 'sup']
 
+
+		blue_wins = 0
+		blue_games = 0
+		red_wins = 0
+		red_games = 0
+
 		for row in table_rows:
 			game = extract_game_from_row(row, False)
+
+
 
 			win_seq.append(game.win)
 			all_games.append(game)
@@ -49,8 +63,6 @@ if __name__ == "__main__":
 				if player not in set(all_players.keys()):
 					all_players[player] = {'role': roles[i]}
 
-
-		#print(all_players)
 		team_data['recent_game_results'] = win_seq
 
 		
@@ -76,28 +88,49 @@ if __name__ == "__main__":
 					pass
 
 			for key in player_champs.keys():
-				player_champs[key]['pickrate'] = str(int(player_champs[key]['games'])/n_games)
-
-
+				player_champs[key]['pickrate'] = str(round(float(100*int(player_champs[key]['games'])/n_games), 1))
 
 
 			avg_kda = list()
+			avg_k = list()
+			avg_d = list()
+			avg_a = list()
 			avg_kp = list()
 			avg_ks = list()
 			avg_gs = list()
 
 			avg_kda_den = list()
+			avg_k_den = list()
+			avg_d_den = list()
+			avg_a_den = list()
 			avg_kp_den = list()
 			avg_ks_den = list()
 			avg_gs_den = list()
 
 			for key in player_champs.keys():
-
 				try:
 					avg_kda.append(float(player_champs[key]['kda'])*float(player_champs[key]['pickrate']))
 					avg_kda_den.append(float(player_champs[key]['pickrate']))
 				except:
 					print(player, key, 'kda error')
+
+				try:
+					avg_k.append(float(player_champs[key]['kills'])*float(player_champs[key]['pickrate']))
+					avg_k_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'k error')
+
+				try:
+					avg_d.append(float(player_champs[key]['deaths'])*float(player_champs[key]['pickrate']))
+					avg_d_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'd error')
+
+				try:
+					avg_a.append(float(player_champs[key]['assists'])*float(player_champs[key]['pickrate']))
+					avg_a_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'a error')
 
 				try:
 					avg_kp.append(float(player_champs[key]['kpar'].split('%')[0])*float(player_champs[key]['pickrate']))
@@ -118,16 +151,18 @@ if __name__ == "__main__":
 					print(player, key, 'gs error')
 
 
-			all_players[player]['avg_kda'] = np.sum(avg_kda)/np.sum(avg_kda_den)
-			all_players[player]['avg_kp'] = np.sum(avg_kp)/np.sum(avg_kp_den)
-			all_players[player]['avg_ks'] = np.sum(avg_ks)/np.sum(avg_ks_den)
-			all_players[player]['avg_gs'] = np.sum(avg_gs)/np.sum(avg_gs_den)
+			all_players[player]['avg_kda'] = round(np.sum(avg_kda)/np.sum(avg_kda_den),1)
+			all_players[player]['avg_k'] = round(np.sum(avg_k)/np.sum(avg_k_den),1)
+			all_players[player]['avg_d'] = round(np.sum(avg_d)/np.sum(avg_d_den),1)
+			all_players[player]['avg_a'] = round(np.sum(avg_a)/np.sum(avg_a_den),1)
+			all_players[player]['avg_kp'] = round(np.sum(avg_kp)/np.sum(avg_kp_den),1)
+			all_players[player]['avg_ks'] = round(np.sum(avg_ks)/np.sum(avg_ks_den),1)
+			all_players[player]['avg_gs'] = round(np.sum(avg_gs)/np.sum(avg_gs_den),1)
 			
 
 			all_player_champs[player] = player_champs
 
 
-	#	print(all_player_champs)
 
 		team_data['player_champ_stats'] = all_player_champs
 
@@ -135,73 +170,14 @@ if __name__ == "__main__":
 
 
 		# get teamwide data
-		url = construct_gol_url(team)
+		url = construct_gol_url(team, team_dict)
 		data = extract_gol_data(url)
-
-		#print(data)
 
 		team_data['team_stats'] = data
 
 		with open('data/'+ abbrv_dict[team] +'.json', 'w') as outfile:
 			json.dump(team_data, outfile)
 
-
-
-	# end loop
-
-#	with open('data/all_teams.json', 'w') as outfile:
-#			json.dump(all_team_data, outfile)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	# n_games = {player: dict() for player in all_players}
-	# n_wins = {player: dict() for player in all_players}
-
-	# for game in all_games:
-
-	# 	curr_players = game.players
-	# 	curr_champs = game.picks
-
-	# 	for i in range(len(curr_players)):
-
-	# 		if curr_champs[i] not in set(n_games[curr_players[i]].keys()):
-	# 			n_games[curr_players[i]][curr_champs[i]] = 1
-	# 			n_wins[curr_players[i]][curr_champs[i]] = game.win
-	# 		else:
-	# 			n_games[curr_players[i]][curr_champs[i]] += 1
-	# 			n_wins[curr_players[i]][curr_champs[i]] += game.win
-	# df_games = pd.DataFrame(n_games)
-	# print(df_games)
-
-	# df_wins = pd.DataFrame(n_wins)
-	# print(df_wins)
-
-	# df_pickrate = df_games.divide(df_games.sum(axis = 0), axis = 1)
-	# print(df_pickrate)
-
-	# df_winrate = df_wins/df_games
-	# print(df_winrate)
-	# for player in all_players:
-	# 	top_picked = df_pickrate.loc[:,player].sort_values(ascending = False)
-	# 	top_win = df_winrate.loc[:,player].sort_values(ascending = False)
-
-	# 	print('top picks for ' + player + ': \n' + str(top_picked[0:3]))
-	# 	print('\ntop winrate for ' + player + ': \n' + str(top_win[0:3]))
 
 
 	
