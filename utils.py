@@ -1,5 +1,6 @@
 import urllib.request
 from bs4 import BeautifulSoup
+
 from models import LeagueGame
 
 
