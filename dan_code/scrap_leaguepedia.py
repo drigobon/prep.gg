@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 from utils import *
 import models
@@ -24,13 +25,46 @@ if __name__ == "__main__":
 		all_games.append(game)
 		all_players = set(list(all_players) + game.players)
 
-	print(all_players)
 
 
 
+	n_games = {player: dict() for player in all_players}
+	n_wins = {player: dict() for player in all_players}
+
+	for game in all_games:
+
+		curr_players = game.players
+		curr_champs = game.picks
+
+		for i in range(len(curr_players)):
+
+			if curr_champs[i] not in set(n_games[curr_players[i]].keys()):
+				n_games[curr_players[i]][curr_champs[i]] = 1
+				n_wins[curr_players[i]][curr_champs[i]] = game.win
+			else:
+				n_games[curr_players[i]][curr_champs[i]] += 1
+				n_wins[curr_players[i]][curr_champs[i]] += game.win
 
 
-	# Given data, run analysis
+	df_games = pd.DataFrame(n_games)
+	print(df_games)
+
+	df_wins = pd.DataFrame(n_wins)
+	print(df_wins)
+
+	df_pickrate = df_games.divide(df_games.sum(axis = 0), axis = 1)
+	print(df_pickrate)
+
+	df_winrate = df_wins/df_games
+	print(df_winrate)
+
+
+	for player in all_players:
+		top_picked = df_pickrate.loc[:,player].sort_values(ascending = False)
+		top_win = df_winrate.loc[:,player].sort_values(ascending = False)
+
+		print('top picks for ' + player + ': \n' + str(top_picked[0:3]))
+		print('\ntop winrate for ' + player + ': \n' + str(top_win[0:3]))
 
 
 
