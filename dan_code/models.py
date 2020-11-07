@@ -33,7 +33,7 @@ class LeaguePlayer:
 class LeagueTeam:
 	def __init__(self, players, data):
 		self.players = players
-		
+
 		self.region = data['region']
 		self.season = data['season']
 		self.WL = data['WL']
@@ -44,6 +44,4 @@ class LeagueTeam:
 		self.aggression =  data['aggression']
 		self.objectives = data['objectives']
 		self.vision = data['vision']
-		self.WL_blue = data['WL_blue']
-		self.WL_red = data['WL_red']
-		self.drag_prio = data['dragon_prio']
+		

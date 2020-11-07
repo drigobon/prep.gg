@@ -67,11 +67,16 @@ if __name__ == "__main__":
 
 		team_data['team_stats'] = data
 
+		with open('data/by_team/'+team+'.json', 'w') as outfile:
+			json.dump(team_data, outfile)
+
 
 		
 
 		all_team_data[team] = team_data
 
+	with open('data/all_teams.json', 'w') as outfile:
+			json.dump(all_team_data, outfile)
 
 
 
