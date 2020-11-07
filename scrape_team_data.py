@@ -14,98 +14,138 @@ if __name__ == "__main__":
 			 'LGD_Gaming', 'Machi_Esports', 'PSG_Talon', 'Rogue_(European_Team)', 'Suning',
 			 'Team_Liquid', 'Team_SoloMid', 'Top_Esports', 'Unicorns_Of_Love.CIS']
 
-	abbrv = ['DAMWON_Gaming', 'DRX', 'FlyQuest', 'Fnatic', 'G2_Esports', 'Gen.G', 'JD_Gaming',
-			 'LGD_Gaming', 'Machi_Esports', 'PSG_Talon', 'Rogue_(European_Team)', 'Suning',
-			 'Team_Liquid', 'Team_SoloMid', 'Top_Esports', 'Unicorns_Of_Love.CIS']
+	abbrv_dict = {'DAMWON_Gaming': 'DWG', 'DRX': 'DRX', 'FlyQuest': 'FLY', 'Fnatic': 'FNC', 'G2_Esports': 'G2', 'Gen.G': 'GEN', 'JD_Gaming': 'JDG',
+			 'LGD_Gaming': 'LGD', 'Machi_Esports': 'M17', 'PSG_Talon': 'PSG', 'Rogue_(European_Team)': 'RGE', 'Suning': 'SN',
+			 'Team_Liquid': 'TL', 'Team_SoloMid': 'TSM', 'Top_Esports': 'TES', 'Unicorns_Of_Love.CIS': 'UOL'}
 
-#	for team in teams:
+	for team in teams:
 
-	team = 'Team_Liquid'
+#	team = 'Team_Liquid'
+		print(team)
 
+		team_data = dict()
 
-	team_data = dict()
-
-	team_data['name'] = " ".join(team.split("_"))
-	team_data['abbrv'] = 2
-
-
-	# get leaguepedia data
-	url = construct_url_for_team(team)
-	table_rows = extract_table_rows_from_url(url)
-
-	all_players = dict()
-	all_games = list()
-	win_seq = list()
-
-	roles = ['top', 'jungle', 'mid', 'adc', 'sup']
-
-	for row in table_rows:
-		game = extract_game_from_row(row, False)
-
-		win_seq.append(game.win)
-		all_games.append(game)
-
-		for (i,player) in enumerate(game.players):
-			if player not in set(all_players.keys()):
-				all_players[player] = {'role': roles[i]}
+		team_data['name'] = " ".join(team.split("_"))
+		team_data['abbrv'] = abbrv_dict[team]
 
 
-	#print(all_players)
-	team_data['recent_game_results'] = win_seq
+		# get leaguepedia data
+		url = construct_url_for_team(team)
+		table_rows = extract_table_rows_from_url(url)
 
-	
-	# get player-specific data
-	all_player_champs = dict()
+		all_players = dict()
+		all_games = list()
+		win_seq = list()
 
-	for player in list(all_players.keys()):
-		url = construct_url_for_player(player)
-		rows = extract_player_data_from_url(url)
+		roles = ['top', 'jungle', 'mid', 'adc', 'sup']
 
-		player_champs = dict()
+		for row in table_rows:
+			game = extract_game_from_row(row, False)
 
-		n_games = 0
+			win_seq.append(game.win)
+			all_games.append(game)
 
-		for row in rows:
-			try:
-				data = extract_champ_from_row(row)
-
-				player_champs[data['champ']] = data
-
-				n_games += int(data['games'])
-			except:
-				pass
-
-		for key in player_champs.keys():
-			player_champs[key]['pickrate'] = str(int(player_champs[key]['games'])/n_games)
-
-		all_players[player]['avg_kda'] = np.sum([float(player_champs[key]['kda'])*float(player_champs[key]['pickrate']) for key in player_champs.keys()])
-		all_players[player]['avg_kp'] = np.sum([float(player_champs[key]['kpar'].split('%')[0])*float(player_champs[key]['pickrate']) for key in player_champs.keys()])
-		all_players[player]['avg_ks'] = np.sum([float(player_champs[key]['killshare'].split('%')[0])*float(player_champs[key]['pickrate']) for key in player_champs.keys()])
-		all_players[player]['avg_gs'] = np.sum([float(player_champs[key]['goldshare'].split('%')[0])*float(player_champs[key]['pickrate']) for key in player_champs.keys()])
-
-		all_player_champs[player] = player_champs
+			for (i,player) in enumerate(game.players):
+				if player not in set(all_players.keys()):
+					all_players[player] = {'role': roles[i]}
 
 
-#	print(all_player_champs)
+		#print(all_players)
+		team_data['recent_game_results'] = win_seq
 
-	team_data['player_champ_stats'] = all_player_champs
+		
+		# get player-specific data
+		all_player_champs = dict()
 
-	team_data['player_stats'] = all_players
+		for player in list(all_players.keys()):
+			url = construct_url_for_player(player)
+			rows = extract_player_data_from_url(url)
+
+			player_champs = dict()
+
+			n_games = 0
+
+			for row in rows:
+				try:
+					data = extract_champ_from_row(row)
+
+					player_champs[data['champ']] = data
+
+					n_games += int(data['games'])
+				except:
+					pass
+
+			for key in player_champs.keys():
+				player_champs[key]['pickrate'] = str(int(player_champs[key]['games'])/n_games)
 
 
-	# get teamwide data
-	url = construct_gol_url(team)
-	data = extract_gol_data(url)
-
-	#print(data)
-
-	team_data['team_stats'] = data
-
-	with open('data/by_team/'+team+'.json', 'w') as outfile:
-		json.dump(team_data, outfile)
 
 
-#	all_team_data[team] = team_data
+			avg_kda = list()
+			avg_kp = list()
+			avg_ks = list()
+			avg_gs = list()
+
+			avg_kda_den = list()
+			avg_kp_den = list()
+			avg_ks_den = list()
+			avg_gs_den = list()
+
+			for key in player_champs.keys():
+
+				try:
+					avg_kda.append(float(player_champs[key]['kda'])*float(player_champs[key]['pickrate']))
+					avg_kda_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'kda error')
+
+				try:
+					avg_kp.append(float(player_champs[key]['kpar'].split('%')[0])*float(player_champs[key]['pickrate']))
+					avg_kp_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'kp error')
+
+				try:
+					avg_ks.append(float(player_champs[key]['killshare'].split('%')[0])*float(player_champs[key]['pickrate']))
+					avg_ks_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'ks error')
+
+				try:
+					avg_gs.append(float(player_champs[key]['goldshare'].split('%')[0])*float(player_champs[key]['pickrate']))
+					avg_gs_den.append(float(player_champs[key]['pickrate']))
+				except:
+					print(player, key, 'gs error')
+
+
+			all_players[player]['avg_kda'] = np.sum(avg_kda)/np.sum(avg_kda_den)
+			all_players[player]['avg_kp'] = np.sum(avg_kp)/np.sum(avg_kp_den)
+			all_players[player]['avg_ks'] = np.sum(avg_ks)/np.sum(avg_ks_den)
+			all_players[player]['avg_gs'] = np.sum(avg_gs)/np.sum(avg_gs_den)
+			
+
+			all_player_champs[player] = player_champs
+
+
+	#	print(all_player_champs)
+
+		team_data['player_champ_stats'] = all_player_champs
+
+		team_data['player_stats'] = all_players
+
+
+		# get teamwide data
+		url = construct_gol_url(team)
+		data = extract_gol_data(url)
+
+		#print(data)
+
+		team_data['team_stats'] = data
+
+		with open('data/by_team/'+ abbrv_dict[team] +'.json', 'w') as outfile:
+			json.dump(team_data, outfile)
+
+
 
 	# end loop
 
