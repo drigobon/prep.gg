@@ -46,6 +46,15 @@ if __name__ == "__main__":
 				n_wins[curr_players[i]][curr_champs[i]] += game.win
 
 
+
+
+	team = LeagueTeam(all_players)
+
+
+
+
+
+
 	df_games = pd.DataFrame(n_games)
 	print(df_games)
 
