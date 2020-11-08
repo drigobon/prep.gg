@@ -6,7 +6,7 @@ You can check out the final product [here](www.prep.gg).
 
 There is a lot of publicly available data on League of Legends (LoL) pro teams. However, it is scattered across multiple websites, the information is not presented in a format easily digestible by teams.
 
-We present '[prep.gg](www.prep.gg)', a one-stop analytics site for gathering relevant scouting information on LoL pro teams in the four major regions.
+We present [prep.gg](www.prep.gg), a one-stop analytics site for gathering relevant scouting information on LoL pro teams in the four major regions.
 
 ## How To Run
 
