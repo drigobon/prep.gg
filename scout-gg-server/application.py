@@ -24,6 +24,7 @@ abbrev_to_team_name = {
 	"TES": "Top Esports",
 	"JDG": "JD Gaming",
 	"LGD": "LGD Gaming",
+	"BLG": "Bilibili Gaming",
 	"SN": "Suning",
 	"FPX": "FunPlus Phoenix",
 	"ES": "eStar Gaming",
