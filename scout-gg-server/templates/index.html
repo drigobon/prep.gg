@@ -419,6 +419,10 @@
                           </td>
                           <td class="pl-md-2">
                             <small class="text-black font-weight-medium d-block">{{ player }}</small>
+                            {% if loop.index > 5 %}
+                            <span class="text-gray">
+                              <span class="status-indicator rounded-indicator small bg-warning"></span>Bench / Inactive / Traded </span>
+                            {% endif %}
                           </td>
                           <td> {{ player_data["avg_kp"] }}% </td>
                           <td>
