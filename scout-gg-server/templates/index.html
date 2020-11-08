@@ -147,11 +147,11 @@
           </div>
           <div class="info-wrapper">
             <p class="user-name">{{ team }}</p>
-            <h6 class="display-income">{{data["team_stats"]["region"]}}</h6>
+            <h6 class="display-income">Region: {{data["team_stats"]["region"]}}</h6>
           </div>
         </div>
         <ul class="navigation-menu">
-          <li class="nav-category-divider">MAIN</li>
+          <li class="nav-category-divider">Nav</li>
           <li>
             <a href={{ url_for('home')}}>
               <span class="link-title">Home</span>
@@ -222,8 +222,8 @@
           <div class="content-viewport">
             <div class="row">
               <div class="col-12 py-5">
-                <h4>League of Legends</h4>
-                <p class="text-gray">Last Updated 11/06/2020</p>
+                <h4>2020 Team Statistics</h4>
+                <p class="text-gray">Last Updated 11/08/2020</p>
               </div>
             </div>
             <div class="row">
@@ -509,7 +509,7 @@
               <div class="col-md-6 equel-grid">
                 <div class="grid">
                   <div class="grid-body py-3">
-                    <p class="card-title ml-n1">{{player}} Champ Pool</p>
+                    <p class="card-title ml-n1">'{{player}}' Champ Pool</p>
                   </div>
                   <div class="table-responsive">
                     <table class="table table-hover table-sm">
