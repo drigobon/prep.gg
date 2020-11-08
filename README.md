@@ -1,6 +1,6 @@
 # prep.gg
 
-You can check out the final product [here](www.prep.gg).
+Built initially as project for LiquidHacks. You can check out the final product [here](www.prep.gg).
 
 ## Intro
 
