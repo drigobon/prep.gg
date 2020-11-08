@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>scout.gg</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href={{ url_for('static', filename='vendors/iconfonts/mdi/css/materialdesignicons.css') }}>
+    <!-- endinject -->
+    <!-- vendor css for this page -->
+    <!-- End vendor css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href={{ url_for('static', filename='css/shared/style.css') }}>
+    <!-- endinject -->
+    <!-- Layout style -->
+    <link rel="stylesheet" href={{ url_for('static', filename='css/demo_1/style.css') }}>
+    <!-- Layout style -->
+    <link rel="shortcut icon" href={{ url_for('static', filename='images/favicon.ico') }} />
+  </head>
+  <body class="header-fixed">
+    <!-- partial:partials/_header.html -->
+    <nav class="t-header">
+      <div class="t-header-brand-wrapper">
+        <a>
+          <!--img class="logo" src="../assets/images/logo.svg" alt="">
+          <img class="logo-mini" src="../assets/images/logo_mini.svg" alt=""-->
+        </a>
+      </div>
+      </div>
+      <div class="t-header-content-wrapper">
+        <div class="t-header-content">
+          <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
+            <i class="mdi mdi-menu"></i>
+          </button>
+          <!--form action="#" class="t-header-search-box">
+            <div class="input-group">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
+              <button class="btn btn-primary" type="submit"><i class="mdi mdi-arrow-right-thick"></i></button>
+            </div>
+          </form-->
+          
+        </div>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="page-body">
+      <!-- partial:partials/_sidebar.html -->
+      <div class="sidebar">
+        <div class="user-profile">
+          <div class="display-avatar animated-avatar">
+            <img class="profile-img img-lg rounded-circle" src={{ url_for('static', filename='images/scout.png') }} alt="profile image">
+          </div>
+          <div class="info-wrapper">
+            <p class="user-name">scout.gg</p>
+            <p class="display-income">"yes, sir!"</p>
+          </div>
+        </div>
+        <ul class="navigation-menu">
+          <li class="nav-category-divider">MAIN</li>
+          <li>
+            <a href={{ url_for('home') }}>
+              <span class="link-title">Home</span>
+              <i class="mdi mdi-home link-icon"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- partial -->
+      <div class="page-content-wrapper">
+        <div class="page-content-wrapper-inner">
+          <div class="content-viewport">
+            <div class="row">
+              <div class="col-12 py-5">
+                <h4>Make Scouting More Efficient.</h4>
+                <p class="text-gray">Scout Pro League of Legend Teams with in-depth detailed statistics.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="grid">
+                  <div class="grid-body">
+                    <h2 class="grid-title">We're Scout.GG</h2>
+                    <div class="item-wrapper">
+                      <p>We aggregate stats about all pro LoL teams, and display it in a digestible, clear format. Let's save your team some time when prepping.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 equel-grid">
+                <div class="grid">
+                  <div class="grid-body py-3">
+                    <p class="card-title ml-n1">LCS Teams</p>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr class="solid-header">
+                          <th colspan="2" class="pl-4">Team</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for team in lcs %}
+                        <tr onclick="window.location.href='{{ url_for('team_page', team_abbreviation=team)}}';">
+                          <td class="pr-0 pl-4">
+                            <img class="profile-img img-sm" src={{ url_for('static', filename='images/profile/teams/' + team + '.png') }} alt="profile image">
+                          </td>
+                          <td class="pl-md-0">
+                            <small class="text-black font-weight-medium d-block">{{ team }}</small>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 equel-grid">
+                <div class="grid">
+                  <div class="grid-body py-3">
+                    <p class="card-title ml-n1">LEC Teams</p>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr class="solid-header">
+                          <th colspan="2" class="pl-4">Team</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for team in lec %}
+                        <tr onclick="window.location.href='{{ url_for('team_page', team_abbreviation=team)}}';">
+                          <td class="pr-0 pl-4">
+                            <img class="profile-img img-sm" src={{ url_for('static', filename='images/profile/teams/' + team + '.png') }} alt="profile image">
+                          </td>
+                          <td class="pl-md-0">
+                            <small class="text-black font-weight-medium d-block">{{ team }}</small>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 equel-grid">
+                <div class="grid">
+                  <div class="grid-body py-3">
+                    <p class="card-title ml-n1">LCK Teams</p>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr class="solid-header">
+                          <th colspan="2" class="pl-4">Team</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for team in lck %}
+                        <tr onclick="window.location.href='{{ url_for('team_page', team_abbreviation=team)}}';">
+                          <td class="pr-0 pl-4">
+                            <img class="profile-img img-sm" src={{ url_for('static', filename='images/profile/teams/' + team + '.png') }} alt="profile image">
+                          </td>
+                          <td class="pl-md-0">
+                            <small class="text-black font-weight-medium d-block">{{ team }}</small>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 equel-grid">
+                <div class="grid">
+                  <div class="grid-body py-3">
+                    <p class="card-title ml-n1">LPL Teams</p>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr class="solid-header">
+                          <th colspan="2" class="pl-4">Team</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for team in lpl %}
+                        <tr onclick="window.location.href='{{ url_for('team_page', team_abbreviation=team)}}';">
+                          <td class="pr-0 pl-4">
+                            <img class="profile-img img-sm" src={{ url_for('static', filename='images/profile/teams/' + team + '.png') }} alt="profile image">
+                          </td>
+                          <td class="pl-md-0">
+                            <small class="text-black font-weight-medium d-block">{{ team }}</small>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- content viewport ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="row">
+            <div class="col-sm-6 text-center text-sm-right order-sm-1">
+              <!--ul class="text-gray">
+                <li><a href="#">Terms of use</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul-->
+            </div>
+            <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
+              <small class="text-muted d-block">Template credits to <a href="http://www.uxcandy.co" target="_blank">UXCANDY</a>.</small>
+              <small class="text-gray mt-2">Made by two low-elo league aficionados.</i></small>
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- page content ends -->
+    </div>
+    <!--page body ends -->
+    <!-- SCRIPT LOADING START FORM HERE /////////////-->
+    <!-- plugins:js -->
+     <script src={{ url_for('static', filename='vendors/js/core.js') }}></script>
+    <!-- endinject -->
+    <!-- Vendor Js For This Page Ends-->
+    <script src={{ url_for('static', filename='vendors/apexcharts/apexcharts.min.js') }}></script>
+    <script src={{ url_for('static', filename='vendors/chartjs/Chart.min.js') }}></script>
+    <script src={{ url_for('static', filename='js/charts/chartjs.addon.js') }}></script>
+    <!-- Vendor Js For This Page Ends-->
+    <!-- build:js -->
+    <script src={{ url_for('static', filename='js/template.js') }}></script>
+    <script src={{ url_for('static', filename='js/dashboard.js') }}></script>
+    <script src={{ url_for('static', filename='js/charts/chartjs.js') }}></script>
+    <!-- endbuild -->
+  </body>
+</html>
