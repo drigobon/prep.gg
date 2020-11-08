@@ -1,12 +1,12 @@
 # prep.gg
 
-Built initially as project for LiquidHacks. You can check out the final product [here](www.prep.gg).
+Built initially as project for LiquidHacks. You can check out the final product [here](http://www.prep.gg).
 
 ## Intro
 
 There is a lot of publicly available data on League of Legends (LoL) pro teams. However, it is scattered across multiple websites, the information is not presented in a format easily digestible by teams.
 
-We present [prep.gg](www.prep.gg), a one-stop analytics site for gathering relevant scouting information on LoL pro teams in the four major regions.
+We present [prep.gg](http://www.prep.gg), a one-stop analytics site for gathering relevant scouting information on LoL pro teams in the four major regions.
 
 ## How To Run
 
@@ -51,4 +51,4 @@ Andy is proud to have completed a full-stack product people can (hopefully) use,
 
 ## What's next for prep.gg
 
-Our ultimate goal is for [prep.gg](www.prep.gg) to be used by people in the industry. In that vein, we’d like to make a few changes before the upcoming spring split. First, we want to add a functionality for filtering by patch, split, and date, so that teams can construct manual time windows to scout. In addition, we’re looking to incorporate players’ soloQ data from [u.gg](https://u.gg) and [op.gg](https://op.gg). Lastly, we would like to calculate world-wide and regional averages for different stats, so we can objectively evaluate teams and players with respect to their regional and global competitive scenes.
+Our ultimate goal is for [prep.gg](http://www.prep.gg) to be used by people in the industry. In that vein, we’d like to make a few changes before the upcoming spring split. First, we want to add a functionality for filtering by patch, split, and date, so that teams can construct manual time windows to scout. In addition, we’re looking to incorporate players’ soloQ data from [u.gg](https://u.gg) and [op.gg](https://op.gg). Lastly, we would like to calculate world-wide and regional averages for different stats, so we can objectively evaluate teams and players with respect to their regional and global competitive scenes.
