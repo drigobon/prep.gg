@@ -71,7 +71,7 @@ if __name__ == "__main__":
 			all_games.append(game)
 
 			for (i,player) in enumerate(game['players']):
-				if player not in set(all_players.keys()):
+				if player.lower() not in set([key.lower() for key in all_players.keys()]):
 					all_players[player] = {'role': roles[i]}
 
 		team_data['team_stats']['blue_winrate'] = round(100*blue_wins/blue_games,1)
