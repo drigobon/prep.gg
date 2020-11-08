@@ -16,7 +16,8 @@ if __name__ == "__main__":
 			 'EStar_(Chinese_Team)', 'FunPlus_Phoenix', 'Royal_Never_Give_Up', 'Top_Esports', 'Bilibili_Gaming', 'EDward_Gaming', 'LNG_Esports', 'Invictus_Gaming', 'Suning', 
 			 			'Team_WE', 'JD_Gaming', 'Dominus_Esports', 'Victory_Five', 'Rogue_Warriors', 'LGD_Gaming', 'Vici_Gaming', 'Oh_My_God', 
 			 'Machi_Esports', 'PSG_Talon', 'Unicorns_Of_Love.CIS',
-			 '100_Thieves', 'Counter_Logic_Gaming', 'Cloud9', 'Dignitas', 'Evil_Geniuses.NA', 'FlyQuest', 'Golden_Guardians', 'Immortals', 'Team_Liquid', 'Team_SoloMid']
+			 '100_Thieves', 'Counter_Logic_Gaming', 'Cloud9', 'Dignitas', 'Evil_Geniuses.NA', 'FlyQuest', 'Golden_Guardians', 'Immortals', 'Team_Liquid', 'Team_SoloMid'
+			 ]
 
 	# from gol.gg team ids
 	team_dict = {'T1': '847', 'DAMWON_Gaming': '849', 'SANDBOX_Gaming': '850', 'Afreeca_Freecs': '851', 'Gen.G': '852', 'DRX': '853', 'KT_Rolster': '854',
