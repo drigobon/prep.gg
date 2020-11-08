@@ -103,9 +103,6 @@ def extract_champ_from_row(row_of_interest):
 			data[key] = table_columns[i].get_text()
 
 		else:
-#			if table_columns[i].get_text().split('%')[0].lower() == '-nan':
-#				data[key] = 'NaN'
-#			else:
 			try:
 				data[key] = float(table_columns[i].get_text().split('%')[0])
 				if math.isnan(data[key]) :
