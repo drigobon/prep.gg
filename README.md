@@ -21,6 +21,6 @@ This hits the development S3 bucket we have, which has public access, so you can
 ## Features in development
 
 Below are features we're currently working on adding.
--add a functionality for filtering by patch, split, and date, so that teams can construct manual time windows to scout 
--incorporate players’ soloQ data from [u.gg](https://u.gg) and [op.gg](https://op.gg)
--calculate world-wide and regional averages for different stats, so we can objectively evaluate teams and players with respect to their regional and global competitive scenes.
+* add a functionality for filtering by patch, split, and date, so that teams can construct manual time windows to scout 
+* incorporate players’ soloQ data from [u.gg](https://u.gg) and [op.gg](https://op.gg)
+* calculate world-wide and regional averages for different stats, so we can objectively evaluate teams and players with respect to their regional and global competitive scenes.
