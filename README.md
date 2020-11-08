@@ -16,6 +16,7 @@ Navigate to `./scout-gg-server`. Make sure you pip install everything in `requir
 python3 application.py
 ```
 
+This hits the development S3 bucket we have, which has public access, so you can run a version of `prep.gg` locally with all the data displaying. We will not be updating the data on the development server as of November 6th, 2020.
 
 ## How we built it
 
