@@ -10,7 +10,7 @@ We present '[_ prep.gg _](www.prep.gg)', a one-stop analytics site for gathering
 
 ## How To Run
 
-Navigate to ./scout-gg-server/. Make sure you install everything in `requirements.txt`. Then, run on command line:
+Navigate to `./scout-gg-server`. Make sure you pip install everything in `requirements.txt`. Then, run on command line:
 
 ```
 python3 application.py
