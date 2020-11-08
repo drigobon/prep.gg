@@ -309,64 +309,92 @@ def scrape_team(team, team_dict, abbrv_dict):
 		avg_ks = list()
 		avg_gs = list()
 
-		avg_kda_den = list()
-		avg_k_den = list()
-		avg_d_den = list()
-		avg_a_den = list()
-		avg_kp_den = list()
-		avg_ks_den = list()
-		avg_gs_den = list()
+		avg_kda_den = 0
+		avg_k_den = 0
+		avg_d_den = 0
+		avg_a_den = 0
+		avg_kp_den = 0
+		avg_ks_den = 0
+		avg_gs_den = 0
 
 		for key in player_champs.keys():
 			try:
 				avg_kda.append(player_champs[key]['kda']*player_champs[key]['pickrate'])
-				avg_kda_den.append(player_champs[key]['pickrate'])
+				avg_kda_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'kda error')
 
 			try:
 				avg_k.append(player_champs[key]['kills']*player_champs[key]['pickrate'])
-				avg_k_den.append(player_champs[key]['pickrate'])
+				avg_k_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'k error')
 
 			try:
 				avg_d.append(player_champs[key]['deaths']*player_champs[key]['pickrate'])
-				avg_d_den.append(player_champs[key]['pickrate'])
+				avg_d_den  += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'd error')
 
 			try:
 				avg_a.append(player_champs[key]['assists']*player_champs[key]['pickrate'])
-				avg_a_den.append(player_champs[key]['pickrate'])
+				avg_a_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'a error')
 
 			try:
 					avg_kp.append(player_champs[key]['kpar']*player_champs[key]['pickrate'])
-					avg_kp_den.append(player_champs[key]['pickrate'])
+					avg_kp_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'kp error')
 
 			try:
 				avg_ks.append(player_champs[key]['killshare']*player_champs[key]['pickrate'])
-				avg_ks_den.append(player_champs[key]['pickrate'])
+				avg_ks_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'ks error')
 
 			try:
 				avg_gs.append(player_champs[key]['goldshare']*player_champs[key]['pickrate'])
-				avg_gs_den.append(player_champs[key]['pickrate'])
+				avg_gs_den += player_champs[key]['pickrate']
 			except:
 				print(player, key, 'gs error')
 
-		all_players[player]['avg_kda'] = round(np.sum(avg_kda)/np.sum(avg_kda_den),1)
-		all_players[player]['avg_k'] = round(np.sum(avg_k)/np.sum(avg_k_den),1)
-		all_players[player]['avg_d'] = round(np.sum(avg_d)/np.sum(avg_d_den),1)
-		all_players[player]['avg_a'] = round(np.sum(avg_a)/np.sum(avg_a_den),1)
-		all_players[player]['avg_kp'] = round(np.sum(avg_kp)/np.sum(avg_kp_den),1)
-		all_players[player]['avg_ks'] = round(np.sum(avg_ks)/np.sum(avg_ks_den),1)
-		all_players[player]['avg_gs'] = round(np.sum(avg_gs)/np.sum(avg_gs_den),1)
+
+		if avg_kda_den > 0:
+			all_players[player]['avg_kda'] = round(np.sum(avg_kda)/avg_kda_den,1)
+		else:
+			all_players[player]['avg_kda'] = 'NaN'
+
+		if avg_k_den > 0:
+			all_players[player]['avg_k'] = round(np.sum(avg_k)/avg_k_den,1)
+		else:
+			all_players[player]['avg_k'] = round(np.sum(avg_k)/avg_k_den,1)
+		
+		if avg_d_den > 0:
+			all_players[player]['avg_d'] = round(np.sum(avg_d)/avg_d_den,1)
+		else:
+			all_players[player]['avg_d'] = round(np.sum(avg_d)/avg_d_den,1)
+		
+		if avg_a_den > 0:
+			all_players[player]['avg_a'] = round(np.sum(avg_a)/avg_a_den,1)
+		else:
+			all_players[player]['avg_a'] = round(np.sum(avg_a)/avg_a_den,1)
+
+		if avg_kp_den > 0:
+			all_players[player]['avg_kp'] = round(np.sum(avg_kp)/avg_kp_den,1)
+		else:
+			all_players[player]['avg_kp'] = round(np.sum(avg_kp)/avg_kp_den,1)
+		
+		if avg_kp_den > 0:
+			all_players[player]['avg_ks'] = round(np.sum(avg_ks)/avg_ks_den,1)
+		else:
+			all_players[player]['avg_ks'] = round(np.sum(avg_ks)/avg_ks_den,1)
+
+		if avg_gs_den > 0:
+			all_players[player]['avg_gs'] = round(np.sum(avg_gs)/avg_gs_den,1)
+		else:
+			all_players[player]['avg_gs'] = round(np.sum(avg_gs)/avg_gs_den,1)
 
 
 		
