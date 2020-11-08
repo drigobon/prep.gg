@@ -1,7 +1,7 @@
 import urllib.request
+import math
 from bs4 import BeautifulSoup
 
-from models import LeagueGame
 
 
 def process_champ_name(champ_name):
@@ -63,18 +63,8 @@ def extract_game_from_row(row_of_interest, verbose=True):
 
 	players_tmp = table_columns[10].find_all('a')
 	data['players'] = [player.get('href').split('/')[1] for player in players_tmp]
-
-	game = LeagueGame(data)
-
-	if verbose:
-		print("game picked champs: ", game.picks)
-		print("game vs picked champs: ", game.vs_picks)
-		print("game win: ", game.win)
-		print("game patch: ", game.patch)
-		print()
-
 		
-	return game
+	return data
 
 
 def construct_url_for_player(player):
@@ -108,10 +98,20 @@ def extract_champ_from_row(row_of_interest):
 	keys = ['champ', 'games', 'wins', 'losses', 'winrate', 'kills', 'deaths', 'assists', 'kda', 'cs', 'csm',
 			'gold', 'gpm', 'kpar', 'killshare', 'goldshare']
 
-	for i in range(len(keys)):
-		data[keys[i]] = table_columns[i].get_text()
+	for i,key in enumerate(keys):
+		if key == 'champ':
+			data[key] = table_columns[i].get_text()
 
-
+		else:
+#			if table_columns[i].get_text().split('%')[0].lower() == '-nan':
+#				data[key] = 'NaN'
+#			else:
+			try:
+				data[key] = float(table_columns[i].get_text().split('%')[0])
+				if math.isnan(data[key]) :
+					data[key] = 'NaN'
+			except:
+				data[key] = 'NaN'
 	return data
 
 
@@ -152,13 +152,13 @@ def extract_gol_data(url):
 	# bans by team
 	most_banned_by = dict()
 	for item in data_tables[1].find_all('td', {'class': 'text-center'}):
-		most_banned_by[item.find_all('img')[0].get('alt')] = item.get_text()
+		most_banned_by[item.find_all('img')[0].get('alt')] = float(item.get_text().split('%')[0])
 	data['most_banned_by'] = most_banned_by
 
 	# bans against team
 	most_banned_vs = dict()
 	for item in data_tables[2].find_all('td', {'class': 'text-center'}):
-		most_banned_vs[item.find_all('img')[0].get('alt')] = item.get_text()
+		most_banned_vs[item.find_all('img')[0].get('alt')] = float(item.get_text().split('%')[0])
 	data['most_banned_vs'] = most_banned_vs
 
 	# economy stats
@@ -169,9 +169,9 @@ def extract_gol_data(url):
 	for i in range(len(keys)):
 		if keys[i] is not None:
 			if keys[i] =='FirstTower':
-				economy[keys[i]] = temp[i].find_all('td')[1].find_all('span')[1].get_text()
+				economy[keys[i]] = float(temp[i].find_all('td')[1].find_all('span')[1].get_text().split('%')[0])
 			else:
-				economy[keys[i]] = temp[i].find_all('td')[1].get_text()
+				economy[keys[i]] = float(temp[i].find_all('td')[1].get_text())
 	data['economy'] = economy
 
 	# aggression stats
@@ -182,9 +182,9 @@ def extract_gol_data(url):
 	for i in range(len(keys)):
 		if keys[i] is not None:
 			if keys[i] =='FirstBlood':
-				aggression[keys[i]] = temp[i].find_all('td')[1].find_all('span')[1].get_text()
+				aggression[keys[i]] = float(temp[i].find_all('td')[1].find_all('span')[1].get_text().split('%')[0])
 			else:
-				aggression[keys[i]] = temp[i].find_all('td')[1].get_text()
+				aggression[keys[i]] = float(temp[i].find_all('td')[1].get_text())
 	data['aggression'] = aggression
 
 	# objectives stats
@@ -194,7 +194,12 @@ def extract_gol_data(url):
 	keys = [None, 'dragsPG', 'drags15', 'heraldsPG', 'baronsPG']
 	for i in range(len(keys)):
 		if keys[i] is not None:	
-			objectives[keys[i]] = temp[i].find_all('td')[1].get_text()
+			if keys[i] == 'drags15':
+				objectives[keys[i]] = float(temp[i].find_all('td')[1].get_text())
+			else:
+				objectives[keys[i]] = float(temp[i].find_all('td')[1].get_text().split('(')[0])
+				objectives[keys[i]+'Percent'] = float(temp[i].find_all('td')[1].get_text().split('(')[1].split('%')[0])
+
 	data['objectives'] = objectives
 
 	# vision stats
@@ -205,9 +210,9 @@ def extract_gol_data(url):
 	for i in range(len(keys)):
 		if keys[i] is not None:
 			if keys[i] =='PercWC':
-				vision[keys[i]] = temp[i].find_all('td')[1].find_all('span')[1].get_text()
+				vision[keys[i]] = float(temp[i].find_all('td')[1].find_all('span')[1].get_text().split('%')[0])
 			else:
-				vision[keys[i]] = temp[i].find_all('td')[1].get_text()
+				vision[keys[i]] = float(temp[i].find_all('td')[1].get_text())
 	data['vision'] = vision
 
 	return data
