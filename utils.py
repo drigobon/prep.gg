@@ -369,32 +369,32 @@ def scrape_team(team, team_dict, abbrv_dict):
 		if avg_k_den > 0:
 			all_players[player]['avg_k'] = round(np.sum(avg_k)/avg_k_den,1)
 		else:
-			all_players[player]['avg_k'] = round(np.sum(avg_k)/avg_k_den,1)
+			all_players[player]['avg_k'] = 'NaN'
 		
 		if avg_d_den > 0:
 			all_players[player]['avg_d'] = round(np.sum(avg_d)/avg_d_den,1)
 		else:
-			all_players[player]['avg_d'] = round(np.sum(avg_d)/avg_d_den,1)
+			all_players[player]['avg_d'] = 'NaN'
 		
 		if avg_a_den > 0:
 			all_players[player]['avg_a'] = round(np.sum(avg_a)/avg_a_den,1)
 		else:
-			all_players[player]['avg_a'] = round(np.sum(avg_a)/avg_a_den,1)
+			all_players[player]['avg_a'] = 'NaN'
 
 		if avg_kp_den > 0:
 			all_players[player]['avg_kp'] = round(np.sum(avg_kp)/avg_kp_den,1)
 		else:
-			all_players[player]['avg_kp'] = round(np.sum(avg_kp)/avg_kp_den,1)
+			all_players[player]['avg_kp'] = 'NaN'
 		
-		if avg_kp_den > 0:
+		if avg_ks_den > 0:
 			all_players[player]['avg_ks'] = round(np.sum(avg_ks)/avg_ks_den,1)
 		else:
-			all_players[player]['avg_ks'] = round(np.sum(avg_ks)/avg_ks_den,1)
+			all_players[player]['avg_ks'] = 'NaN'
 
 		if avg_gs_den > 0:
 			all_players[player]['avg_gs'] = round(np.sum(avg_gs)/avg_gs_den,1)
 		else:
-			all_players[player]['avg_gs'] = round(np.sum(avg_gs)/avg_gs_den,1)
+			all_players[player]['avg_gs'] = 'NaN'
 
 
 		
